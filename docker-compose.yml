@@ -1,0 +1,24 @@
+version: '2'
+services:
+  p:
+    image: postgres:11
+    ports:
+     - "5432:5432"
+#    environment:
+#    - POSTGRES_USER=u
+#    - POSTGRES_PASSWORD=p
+  m:
+    image: mysql:8
+    ports:
+     - "3306:3306"
+    environment:
+    - MYSQL_ROOT_PASSWORD=p
+  v:
+    image: jbfavre/vertica:8.1.1-11_debian-8
+    ports:
+     - "5433:5433"
+# https://hub.docker.com/_/postgres/
+# https://hub.docker.com/_/mysql/
+# https://hub.docker.com/r/jbfavre/vertica/
+# https://hub.docker.com/r/sumitchawla/vertica/
+
