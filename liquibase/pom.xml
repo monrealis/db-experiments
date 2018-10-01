@@ -38,11 +38,26 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <configuration>
-                    <propertyFile>liquibase/liquibase-mysql.properties</propertyFile>
                     <changeLogFile>liquibase/db-changelog-master.xml</changeLogFile>
                 </configuration>
                 <!-- http://shengwangi.blogspot.com/2016/04/liquibase-helloworld-example.html -->
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>mysql</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <configuration>
+                            <propertyFile>liquibase/liquibase-mysql.properties</propertyFile>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
