@@ -92,9 +92,17 @@
                     <plugin>
                         <groupId>org.liquibase</groupId>
                         <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>3.4.1</version>
                         <configuration>
                             <propertyFile>liquibase/liquibase-vertica.properties</propertyFile>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.liquibase.ext</groupId>
+                                <artifactId>liquibase-verticaDatabase</artifactId>
+                                <version>1.2-1</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
