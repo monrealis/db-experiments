@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="db">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/postgres"
+            driverClass="org.postgresql.Driver" password="" userId="postgres" />
+        <javaModelGenerator targetPackage="eu.vytenis.dbe.model" targetProject="database" />
+        <javaClientGenerator targetPackage="eu.vytenis.dbe.client" targetProject="database"
+            type="ANNOTATEDMAPPER" />
+        <table tableName="apartments">
+        </table>
+        <table tableName="buildings">
+        </table>
+    </context>
+</generatorConfiguration>
