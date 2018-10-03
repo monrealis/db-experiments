@@ -1,16 +1,16 @@
-package eu.vytenis.dbe.model;
+package eu.vytenis.dbe.mybatis.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildingsExample {
+public class ApartmentExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public BuildingsExample() {
+    public ApartmentExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

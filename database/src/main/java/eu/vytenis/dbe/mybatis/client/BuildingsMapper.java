@@ -1,7 +1,7 @@
-package eu.vytenis.dbe.client;
+package eu.vytenis.dbe.mybatis.client;
 
-import eu.vytenis.dbe.model.Buildings;
-import eu.vytenis.dbe.model.BuildingsExample;
+import eu.vytenis.dbe.mybatis.model.Buildings;
+import eu.vytenis.dbe.mybatis.model.BuildingsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.DeleteProvider;

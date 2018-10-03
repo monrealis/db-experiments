@@ -1,32 +1,32 @@
-package eu.vytenis.dbe.client;
+package eu.vytenis.dbe.mybatis.client;
 
-import eu.vytenis.dbe.model.Apartments;
-import eu.vytenis.dbe.model.ApartmentsExample.Criteria;
-import eu.vytenis.dbe.model.ApartmentsExample.Criterion;
-import eu.vytenis.dbe.model.ApartmentsExample;
+import eu.vytenis.dbe.mybatis.model.Buildings;
+import eu.vytenis.dbe.mybatis.model.BuildingsExample.Criteria;
+import eu.vytenis.dbe.mybatis.model.BuildingsExample.Criterion;
+import eu.vytenis.dbe.mybatis.model.BuildingsExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class ApartmentsSqlProvider {
+public class BuildingsSqlProvider {
 
-    public String countByExample(ApartmentsExample example) {
+    public String countByExample(BuildingsExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("apartments");
+        sql.SELECT("count(*)").FROM("buildings");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(ApartmentsExample example) {
+    public String deleteByExample(BuildingsExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("apartments");
+        sql.DELETE_FROM("buildings");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(Apartments record) {
+    public String insertSelective(Buildings record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("apartments");
+        sql.INSERT_INTO("buildings");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=INTEGER}");
@@ -35,14 +35,14 @@ public class ApartmentsSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(ApartmentsExample example) {
+    public String selectByExample(BuildingsExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.FROM("apartments");
+        sql.FROM("buildings");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -53,11 +53,11 @@ public class ApartmentsSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        Apartments record = (Apartments) parameter.get("record");
-        ApartmentsExample example = (ApartmentsExample) parameter.get("example");
+        Buildings record = (Buildings) parameter.get("record");
+        BuildingsExample example = (BuildingsExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("buildings");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=INTEGER}");
@@ -69,16 +69,16 @@ public class ApartmentsSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("buildings");
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
         
-        ApartmentsExample example = (ApartmentsExample) parameter.get("example");
+        BuildingsExample example = (BuildingsExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, ApartmentsExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, BuildingsExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

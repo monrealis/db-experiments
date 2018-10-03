@@ -1,4 +1,4 @@
-package eu.vytenis.dbe.model;
+package eu.vytenis.dbe.mybatis.model;
 
 public class Buildings {
     private Integer id;

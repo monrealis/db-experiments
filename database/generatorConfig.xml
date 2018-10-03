@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <context id="db">
+    <context id="mybatis">
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/postgres"
             driverClass="org.postgresql.Driver" password="" userId="postgres" />
-        <javaModelGenerator targetPackage="eu.vytenis.dbe.model" targetProject="database" />
-        <javaClientGenerator targetPackage="eu.vytenis.dbe.client" targetProject="database"
+        <javaModelGenerator targetPackage="eu.vytenis.dbe.mybatis.model" targetProject="database" />
+        <javaClientGenerator targetPackage="eu.vytenis.dbe.mybatis.client" targetProject="database"
             type="ANNOTATEDMAPPER" />
-        <table tableName="apartments">
+        <table tableName="apartments" domainObjectName="Apartment">
         </table>
-        <table tableName="buildings">
+        <table tableName="buildings" domainObjectName="Building">
+        </table>
+    </context>
+
+    <context id="dynamicSql" targetRuntime="MyBatis3DynamicSql">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/postgres"
+            driverClass="org.postgresql.Driver" password="" userId="postgres" />
+        <javaModelGenerator targetPackage="eu.vytenis.dbe.dsql.model" targetProject="database" />
+        <javaClientGenerator targetPackage="eu.vytenis.dbe.dsql.client" targetProject="database"
+            type="ANNOTATEDMAPPER" />
+        <table tableName="apartments" domainObjectName="Apartment">
+        </table>
+        <table tableName="buildings" domainObjectName="Building">
         </table>
     </context>
 </generatorConfiguration>
