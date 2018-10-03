@@ -53,12 +53,13 @@
         </createTable>
         <createTable tableName="apartment_tenants">
             <column name="tenant_id" type="int">
-                <constraints primaryKey="true" nullable="false" />
+                <constraints nullable="false" />
             </column>
             <column name="apartment_id" type="int">
-                <constraints primaryKey="true" nullable="false" />
+                <constraints nullable="false" />
             </column>
         </createTable>
+        <addPrimaryKey columnNames="tenant_id, apartment_id" tableName="apartment_tenants" />
         <createTable tableName="tenants">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false" />
