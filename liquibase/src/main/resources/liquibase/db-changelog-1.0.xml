@@ -8,10 +8,63 @@
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false" />
             </column>
+            <column name="unit_number" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="building_id" type="int">
+                <constraints nullable="false" />
+            </column>
         </createTable>
         <createTable tableName="buildings">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="complex_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="address" type="varchar(500)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="requests">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="status" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="apartment_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(500)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        <createTable tableName="complexes">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="apartment_tenants">
+            <column name="tenant_id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="apartment_id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="tenants">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" />
             </column>
         </createTable>
     </changeSet>
