@@ -1,58 +1,53 @@
 package eu.vytenis.dbe.mybatis.client;
 
-import eu.vytenis.dbe.mybatis.model.Apartment;
-import eu.vytenis.dbe.mybatis.model.ApartmentExample.Criteria;
-import eu.vytenis.dbe.mybatis.model.ApartmentExample.Criterion;
-import eu.vytenis.dbe.mybatis.model.ApartmentExample;
+import eu.vytenis.dbe.mybatis.model.Complex;
+import eu.vytenis.dbe.mybatis.model.ComplexExample.Criteria;
+import eu.vytenis.dbe.mybatis.model.ComplexExample.Criterion;
+import eu.vytenis.dbe.mybatis.model.ComplexExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class ApartmentSqlProvider {
+public class ComplexSqlProvider {
 
-    public String countByExample(ApartmentExample example) {
+    public String countByExample(ComplexExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("apartments");
+        sql.SELECT("count(*)").FROM("complexes");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(ApartmentExample example) {
+    public String deleteByExample(ComplexExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("apartments");
+        sql.DELETE_FROM("complexes");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(Apartment record) {
+    public String insertSelective(Complex record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("apartments");
+        sql.INSERT_INTO("complexes");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=INTEGER}");
         }
         
-        if (record.getUnitNumber() != null) {
-            sql.VALUES("unit_number", "#{unitNumber,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getBuildingId() != null) {
-            sql.VALUES("building_id", "#{buildingId,jdbcType=INTEGER}");
+        if (record.getName() != null) {
+            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
     }
 
-    public String selectByExample(ApartmentExample example) {
+    public String selectByExample(ComplexExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.SELECT("unit_number");
-        sql.SELECT("building_id");
-        sql.FROM("apartments");
+        sql.SELECT("name");
+        sql.FROM("complexes");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -63,22 +58,18 @@ public class ApartmentSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        Apartment record = (Apartment) parameter.get("record");
-        ApartmentExample example = (ApartmentExample) parameter.get("example");
+        Complex record = (Complex) parameter.get("record");
+        ComplexExample example = (ComplexExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("complexes");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=INTEGER}");
         }
         
-        if (record.getUnitNumber() != null) {
-            sql.SET("unit_number = #{record.unitNumber,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getBuildingId() != null) {
-            sql.SET("building_id = #{record.buildingId,jdbcType=INTEGER}");
+        if (record.getName() != null) {
+            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -87,27 +78,22 @@ public class ApartmentSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("complexes");
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
-        sql.SET("unit_number = #{record.unitNumber,jdbcType=VARCHAR}");
-        sql.SET("building_id = #{record.buildingId,jdbcType=INTEGER}");
+        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         
-        ApartmentExample example = (ApartmentExample) parameter.get("example");
+        ComplexExample example = (ComplexExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(Apartment record) {
+    public String updateByPrimaryKeySelective(Complex record) {
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("complexes");
         
-        if (record.getUnitNumber() != null) {
-            sql.SET("unit_number = #{unitNumber,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getBuildingId() != null) {
-            sql.SET("building_id = #{buildingId,jdbcType=INTEGER}");
+        if (record.getName() != null) {
+            sql.SET("name = #{name,jdbcType=VARCHAR}");
         }
         
         sql.WHERE("id = #{id,jdbcType=INTEGER}");
@@ -115,7 +101,7 @@ public class ApartmentSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, ApartmentExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, ComplexExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

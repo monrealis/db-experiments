@@ -14,6 +14,14 @@
         </table>
         <table tableName="buildings" domainObjectName="Building">
         </table>
+        <table tableName="reqhests" domainObjectName="Request">
+        </table>
+        <table tableName="complexes" domainObjectName="Complex">
+        </table>
+        <table tableName="apartment_tenants" domainObjectName="ApartmentTenant">
+        </table>
+        <table tableName="tenants" domainObjectName="Tenant">
+        </table>
     </context>
 
     <context id="dynamicSql" targetRuntime="MyBatis3DynamicSql">
@@ -28,6 +36,14 @@
         <table tableName="apartments" domainObjectName="Apartment">
         </table>
         <table tableName="buildings" domainObjectName="Building">
+        </table>
+        <table tableName="reqhests" domainObjectName="Request">
+        </table>
+        <table tableName="complexes" domainObjectName="Complex">
+        </table>
+        <table tableName="apartment_tenants" domainObjectName="ApartmentTenant">
+        </table>
+        <table tableName="tenants" domainObjectName="Tenant">
         </table>
     </context>
 </generatorConfiguration>

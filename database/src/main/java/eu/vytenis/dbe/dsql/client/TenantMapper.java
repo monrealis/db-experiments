@@ -1,9 +1,9 @@
 package eu.vytenis.dbe.dsql.client;
 
-import static eu.vytenis.dbe.dsql.client.BuildingDynamicSqlSupport.*;
+import static eu.vytenis.dbe.dsql.client.TenantDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import eu.vytenis.dbe.dsql.model.Building;
+import eu.vytenis.dbe.dsql.model.Tenant;
 import java.util.List;
 import javax.annotation.Generated;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -31,7 +31,7 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 
 @Mapper
-public interface BuildingMapper {
+public interface TenantMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     long count(SelectStatementProvider selectStatement);
@@ -42,22 +42,20 @@ public interface BuildingMapper {
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    int insert(InsertStatementProvider<Building> insertStatement);
+    int insert(InsertStatementProvider<Tenant> insertStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @ResultMap("BuildingResult")
-    Building selectOne(SelectStatementProvider selectStatement);
+    @ResultMap("TenantResult")
+    Tenant selectOne(SelectStatementProvider selectStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @Results(id="BuildingResult", value = {
+    @Results(id="TenantResult", value = {
         @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
-        @Result(column="complex_id", property="complexId", jdbcType=JdbcType.INTEGER),
-        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR)
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR)
     })
-    List<Building> selectMany(SelectStatementProvider selectStatement);
+    List<Tenant> selectMany(SelectStatementProvider selectStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
@@ -66,102 +64,90 @@ public interface BuildingMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<Long>> countByExample() {
         return SelectDSL.selectWithMapper(this::count, SqlBuilder.count())
-                .from(building);
+                .from(tenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default DeleteDSL<MyBatis3DeleteModelAdapter<Integer>> deleteByExample() {
-        return DeleteDSL.deleteFromWithMapper(this::delete, building);
+        return DeleteDSL.deleteFromWithMapper(this::delete, tenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int deleteByPrimaryKey(Integer id_) {
-        return DeleteDSL.deleteFromWithMapper(this::delete, building)
+        return DeleteDSL.deleteFromWithMapper(this::delete, tenant)
                 .where(id, isEqualTo(id_))
                 .build()
                 .execute();
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int insert(Building record) {
+    default int insert(Tenant record) {
         return insert(SqlBuilder.insert(record)
-                .into(building)
+                .into(tenant)
                 .map(id).toProperty("id")
-                .map(complexId).toProperty("complexId")
                 .map(name).toProperty("name")
-                .map(address).toProperty("address")
                 .build()
                 .render(RenderingStrategy.MYBATIS3));
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int insertSelective(Building record) {
+    default int insertSelective(Tenant record) {
         return insert(SqlBuilder.insert(record)
-                .into(building)
+                .into(tenant)
                 .map(id).toPropertyWhenPresent("id", record::getId)
-                .map(complexId).toPropertyWhenPresent("complexId", record::getComplexId)
                 .map(name).toPropertyWhenPresent("name", record::getName)
-                .map(address).toPropertyWhenPresent("address", record::getAddress)
                 .build()
                 .render(RenderingStrategy.MYBATIS3));
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Building>>> selectByExample() {
-        return SelectDSL.selectWithMapper(this::selectMany, id, complexId, name, address)
-                .from(building);
+    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Tenant>>> selectByExample() {
+        return SelectDSL.selectWithMapper(this::selectMany, id, name)
+                .from(tenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Building>>> selectDistinctByExample() {
-        return SelectDSL.selectDistinctWithMapper(this::selectMany, id, complexId, name, address)
-                .from(building);
+    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Tenant>>> selectDistinctByExample() {
+        return SelectDSL.selectDistinctWithMapper(this::selectMany, id, name)
+                .from(tenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default Building selectByPrimaryKey(Integer id_) {
-        return SelectDSL.selectWithMapper(this::selectOne, id, complexId, name, address)
-                .from(building)
+    default Tenant selectByPrimaryKey(Integer id_) {
+        return SelectDSL.selectWithMapper(this::selectOne, id, name)
+                .from(tenant)
                 .where(id, isEqualTo(id_))
                 .build()
                 .execute();
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(Building record) {
-        return UpdateDSL.updateWithMapper(this::update, building)
+    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(Tenant record) {
+        return UpdateDSL.updateWithMapper(this::update, tenant)
                 .set(id).equalTo(record::getId)
-                .set(complexId).equalTo(record::getComplexId)
-                .set(name).equalTo(record::getName)
-                .set(address).equalTo(record::getAddress);
+                .set(name).equalTo(record::getName);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(Building record) {
-        return UpdateDSL.updateWithMapper(this::update, building)
+    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(Tenant record) {
+        return UpdateDSL.updateWithMapper(this::update, tenant)
                 .set(id).equalToWhenPresent(record::getId)
-                .set(complexId).equalToWhenPresent(record::getComplexId)
-                .set(name).equalToWhenPresent(record::getName)
-                .set(address).equalToWhenPresent(record::getAddress);
+                .set(name).equalToWhenPresent(record::getName);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int updateByPrimaryKey(Building record) {
-        return UpdateDSL.updateWithMapper(this::update, building)
-                .set(complexId).equalTo(record::getComplexId)
+    default int updateByPrimaryKey(Tenant record) {
+        return UpdateDSL.updateWithMapper(this::update, tenant)
                 .set(name).equalTo(record::getName)
-                .set(address).equalTo(record::getAddress)
                 .where(id, isEqualTo(record::getId))
                 .build()
                 .execute();
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int updateByPrimaryKeySelective(Building record) {
-        return UpdateDSL.updateWithMapper(this::update, building)
-                .set(complexId).equalToWhenPresent(record::getComplexId)
+    default int updateByPrimaryKeySelective(Tenant record) {
+        return UpdateDSL.updateWithMapper(this::update, tenant)
                 .set(name).equalToWhenPresent(record::getName)
-                .set(address).equalToWhenPresent(record::getAddress)
                 .where(id, isEqualTo(record::getId))
                 .build()
                 .execute();

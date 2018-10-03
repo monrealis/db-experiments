@@ -1,48 +1,53 @@
 package eu.vytenis.dbe.mybatis.client;
 
-import eu.vytenis.dbe.mybatis.model.Apartments;
-import eu.vytenis.dbe.mybatis.model.ApartmentsExample.Criteria;
-import eu.vytenis.dbe.mybatis.model.ApartmentsExample.Criterion;
-import eu.vytenis.dbe.mybatis.model.ApartmentsExample;
+import eu.vytenis.dbe.mybatis.model.Tenant;
+import eu.vytenis.dbe.mybatis.model.TenantExample.Criteria;
+import eu.vytenis.dbe.mybatis.model.TenantExample.Criterion;
+import eu.vytenis.dbe.mybatis.model.TenantExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class ApartmentsSqlProvider {
+public class TenantSqlProvider {
 
-    public String countByExample(ApartmentsExample example) {
+    public String countByExample(TenantExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("apartments");
+        sql.SELECT("count(*)").FROM("tenants");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(ApartmentsExample example) {
+    public String deleteByExample(TenantExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("apartments");
+        sql.DELETE_FROM("tenants");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(Apartments record) {
+    public String insertSelective(Tenant record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("apartments");
+        sql.INSERT_INTO("tenants");
         
         if (record.getId() != null) {
             sql.VALUES("id", "#{id,jdbcType=INTEGER}");
         }
         
+        if (record.getName() != null) {
+            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
-    public String selectByExample(ApartmentsExample example) {
+    public String selectByExample(TenantExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("id");
         } else {
             sql.SELECT("id");
         }
-        sql.FROM("apartments");
+        sql.SELECT("name");
+        sql.FROM("tenants");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -53,14 +58,18 @@ public class ApartmentsSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        Apartments record = (Apartments) parameter.get("record");
-        ApartmentsExample example = (ApartmentsExample) parameter.get("example");
+        Tenant record = (Tenant) parameter.get("record");
+        TenantExample example = (TenantExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("tenants");
         
         if (record.getId() != null) {
             sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        }
+        
+        if (record.getName() != null) {
+            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -69,16 +78,30 @@ public class ApartmentsSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("apartments");
+        sql.UPDATE("tenants");
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
         
-        ApartmentsExample example = (ApartmentsExample) parameter.get("example");
+        TenantExample example = (TenantExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, ApartmentsExample example, boolean includeExamplePhrase) {
+    public String updateByPrimaryKeySelective(Tenant record) {
+        SQL sql = new SQL();
+        sql.UPDATE("tenants");
+        
+        if (record.getName() != null) {
+            sql.SET("name = #{name,jdbcType=VARCHAR}");
+        }
+        
+        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        
+        return sql.toString();
+    }
+
+    protected void applyWhere(SQL sql, TenantExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

@@ -3,14 +3,14 @@ package eu.vytenis.dbe.mybatis.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildingExample {
+public class TenantExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public BuildingExample() {
+    public TenantExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,66 +164,6 @@ public class BuildingExample {
             return (Criteria) this;
         }
 
-        public Criteria andComplexIdIsNull() {
-            addCriterion("complex_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdIsNotNull() {
-            addCriterion("complex_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdEqualTo(Integer value) {
-            addCriterion("complex_id =", value, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdNotEqualTo(Integer value) {
-            addCriterion("complex_id <>", value, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdGreaterThan(Integer value) {
-            addCriterion("complex_id >", value, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("complex_id >=", value, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdLessThan(Integer value) {
-            addCriterion("complex_id <", value, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdLessThanOrEqualTo(Integer value) {
-            addCriterion("complex_id <=", value, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdIn(List<Integer> values) {
-            addCriterion("complex_id in", values, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdNotIn(List<Integer> values) {
-            addCriterion("complex_id not in", values, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdBetween(Integer value1, Integer value2) {
-            addCriterion("complex_id between", value1, value2, "complexId");
-            return (Criteria) this;
-        }
-
-        public Criteria andComplexIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("complex_id not between", value1, value2, "complexId");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -291,76 +231,6 @@ public class BuildingExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressIsNull() {
-            addCriterion("address is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressIsNotNull() {
-            addCriterion("address is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressEqualTo(String value) {
-            addCriterion("address =", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressNotEqualTo(String value) {
-            addCriterion("address <>", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressGreaterThan(String value) {
-            addCriterion("address >", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressGreaterThanOrEqualTo(String value) {
-            addCriterion("address >=", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressLessThan(String value) {
-            addCriterion("address <", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressLessThanOrEqualTo(String value) {
-            addCriterion("address <=", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressLike(String value) {
-            addCriterion("address like", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressNotLike(String value) {
-            addCriterion("address not like", value, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressIn(List<String> values) {
-            addCriterion("address in", values, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressNotIn(List<String> values) {
-            addCriterion("address not in", values, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressBetween(String value1, String value2) {
-            addCriterion("address between", value1, value2, "address");
-            return (Criteria) this;
-        }
-
-        public Criteria andAddressNotBetween(String value1, String value2) {
-            addCriterion("address not between", value1, value2, "address");
             return (Criteria) this;
         }
     }

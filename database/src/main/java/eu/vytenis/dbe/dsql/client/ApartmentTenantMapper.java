@@ -1,9 +1,9 @@
 package eu.vytenis.dbe.dsql.client;
 
-import static eu.vytenis.dbe.dsql.client.ApartmentsDynamicSqlSupport.*;
+import static eu.vytenis.dbe.dsql.client.ApartmentTenantDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import eu.vytenis.dbe.dsql.model.Apartments;
+import eu.vytenis.dbe.dsql.model.ApartmentTenant;
 import java.util.List;
 import javax.annotation.Generated;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -30,7 +30,7 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 
 @Mapper
-public interface ApartmentsMapper {
+public interface ApartmentTenantMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     long count(SelectStatementProvider selectStatement);
@@ -41,14 +41,15 @@ public interface ApartmentsMapper {
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    int insert(InsertStatementProvider<Apartments> insertStatement);
+    int insert(InsertStatementProvider<ApartmentTenant> insertStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
-    @Results(id="ApartmentsResult", value = {
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true)
+    @Results(id="ApartmentTenantResult", value = {
+        @Result(column="tenant_id", property="tenantId", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="apartment_id", property="apartmentId", jdbcType=JdbcType.INTEGER, id=true)
     })
-    List<Apartments> selectMany(SelectStatementProvider selectStatement);
+    List<ApartmentTenant> selectMany(SelectStatementProvider selectStatement);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
@@ -57,61 +58,66 @@ public interface ApartmentsMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<Long>> countByExample() {
         return SelectDSL.selectWithMapper(this::count, SqlBuilder.count())
-                .from(apartments);
+                .from(apartmentTenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default DeleteDSL<MyBatis3DeleteModelAdapter<Integer>> deleteByExample() {
-        return DeleteDSL.deleteFromWithMapper(this::delete, apartments);
+        return DeleteDSL.deleteFromWithMapper(this::delete, apartmentTenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int deleteByPrimaryKey(Integer id_) {
-        return DeleteDSL.deleteFromWithMapper(this::delete, apartments)
-                .where(id, isEqualTo(id_))
+    default int deleteByPrimaryKey(Integer tenantId_, Integer apartmentId_) {
+        return DeleteDSL.deleteFromWithMapper(this::delete, apartmentTenant)
+                .where(tenantId, isEqualTo(tenantId_))
+                .and(apartmentId, isEqualTo(apartmentId_))
                 .build()
                 .execute();
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int insert(Apartments record) {
+    default int insert(ApartmentTenant record) {
         return insert(SqlBuilder.insert(record)
-                .into(apartments)
-                .map(id).toProperty("id")
+                .into(apartmentTenant)
+                .map(tenantId).toProperty("tenantId")
+                .map(apartmentId).toProperty("apartmentId")
                 .build()
                 .render(RenderingStrategy.MYBATIS3));
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default int insertSelective(Apartments record) {
+    default int insertSelective(ApartmentTenant record) {
         return insert(SqlBuilder.insert(record)
-                .into(apartments)
-                .map(id).toPropertyWhenPresent("id", record::getId)
+                .into(apartmentTenant)
+                .map(tenantId).toPropertyWhenPresent("tenantId", record::getTenantId)
+                .map(apartmentId).toPropertyWhenPresent("apartmentId", record::getApartmentId)
                 .build()
                 .render(RenderingStrategy.MYBATIS3));
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Apartments>>> selectByExample() {
-        return SelectDSL.selectWithMapper(this::selectMany, id)
-                .from(apartments);
+    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<ApartmentTenant>>> selectByExample() {
+        return SelectDSL.selectWithMapper(this::selectMany, tenantId, apartmentId)
+                .from(apartmentTenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Apartments>>> selectDistinctByExample() {
-        return SelectDSL.selectDistinctWithMapper(this::selectMany, id)
-                .from(apartments);
+    default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<ApartmentTenant>>> selectDistinctByExample() {
+        return SelectDSL.selectDistinctWithMapper(this::selectMany, tenantId, apartmentId)
+                .from(apartmentTenant);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(Apartments record) {
-        return UpdateDSL.updateWithMapper(this::update, apartments)
-                .set(id).equalTo(record::getId);
+    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(ApartmentTenant record) {
+        return UpdateDSL.updateWithMapper(this::update, apartmentTenant)
+                .set(tenantId).equalTo(record::getTenantId)
+                .set(apartmentId).equalTo(record::getApartmentId);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(Apartments record) {
-        return UpdateDSL.updateWithMapper(this::update, apartments)
-                .set(id).equalToWhenPresent(record::getId);
+    default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(ApartmentTenant record) {
+        return UpdateDSL.updateWithMapper(this::update, apartmentTenant)
+                .set(tenantId).equalToWhenPresent(record::getTenantId)
+                .set(apartmentId).equalToWhenPresent(record::getApartmentId);
     }
 }

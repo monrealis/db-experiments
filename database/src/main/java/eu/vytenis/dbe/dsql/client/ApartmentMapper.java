@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -45,8 +46,15 @@ public interface ApartmentMapper {
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
+    @ResultMap("ApartmentResult")
+    Apartment selectOne(SelectStatementProvider selectStatement);
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="ApartmentResult", value = {
-        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true)
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="unit_number", property="unitNumber", jdbcType=JdbcType.VARCHAR),
+        @Result(column="building_id", property="buildingId", jdbcType=JdbcType.INTEGER)
     })
     List<Apartment> selectMany(SelectStatementProvider selectStatement);
 
@@ -78,6 +86,8 @@ public interface ApartmentMapper {
         return insert(SqlBuilder.insert(record)
                 .into(apartment)
                 .map(id).toProperty("id")
+                .map(unitNumber).toProperty("unitNumber")
+                .map(buildingId).toProperty("buildingId")
                 .build()
                 .render(RenderingStrategy.MYBATIS3));
     }
@@ -87,31 +97,66 @@ public interface ApartmentMapper {
         return insert(SqlBuilder.insert(record)
                 .into(apartment)
                 .map(id).toPropertyWhenPresent("id", record::getId)
+                .map(unitNumber).toPropertyWhenPresent("unitNumber", record::getUnitNumber)
+                .map(buildingId).toPropertyWhenPresent("buildingId", record::getBuildingId)
                 .build()
                 .render(RenderingStrategy.MYBATIS3));
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Apartment>>> selectByExample() {
-        return SelectDSL.selectWithMapper(this::selectMany, id)
+        return SelectDSL.selectWithMapper(this::selectMany, id, unitNumber, buildingId)
                 .from(apartment);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<Apartment>>> selectDistinctByExample() {
-        return SelectDSL.selectDistinctWithMapper(this::selectMany, id)
+        return SelectDSL.selectDistinctWithMapper(this::selectMany, id, unitNumber, buildingId)
                 .from(apartment);
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    default Apartment selectByPrimaryKey(Integer id_) {
+        return SelectDSL.selectWithMapper(this::selectOne, id, unitNumber, buildingId)
+                .from(apartment)
+                .where(id, isEqualTo(id_))
+                .build()
+                .execute();
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(Apartment record) {
         return UpdateDSL.updateWithMapper(this::update, apartment)
-                .set(id).equalTo(record::getId);
+                .set(id).equalTo(record::getId)
+                .set(unitNumber).equalTo(record::getUnitNumber)
+                .set(buildingId).equalTo(record::getBuildingId);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(Apartment record) {
         return UpdateDSL.updateWithMapper(this::update, apartment)
-                .set(id).equalToWhenPresent(record::getId);
+                .set(id).equalToWhenPresent(record::getId)
+                .set(unitNumber).equalToWhenPresent(record::getUnitNumber)
+                .set(buildingId).equalToWhenPresent(record::getBuildingId);
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    default int updateByPrimaryKey(Apartment record) {
+        return UpdateDSL.updateWithMapper(this::update, apartment)
+                .set(unitNumber).equalTo(record::getUnitNumber)
+                .set(buildingId).equalTo(record::getBuildingId)
+                .where(id, isEqualTo(record::getId))
+                .build()
+                .execute();
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    default int updateByPrimaryKeySelective(Apartment record) {
+        return UpdateDSL.updateWithMapper(this::update, apartment)
+                .set(unitNumber).equalToWhenPresent(record::getUnitNumber)
+                .set(buildingId).equalToWhenPresent(record::getBuildingId)
+                .where(id, isEqualTo(record::getId))
+                .build()
+                .execute();
     }
 }

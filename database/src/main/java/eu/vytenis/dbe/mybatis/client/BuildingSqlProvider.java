@@ -32,6 +32,18 @@ public class BuildingSqlProvider {
             sql.VALUES("id", "#{id,jdbcType=INTEGER}");
         }
         
+        if (record.getComplexId() != null) {
+            sql.VALUES("complex_id", "#{complexId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getName() != null) {
+            sql.VALUES("name", "#{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAddress() != null) {
+            sql.VALUES("address", "#{address,jdbcType=VARCHAR}");
+        }
+        
         return sql.toString();
     }
 
@@ -42,6 +54,9 @@ public class BuildingSqlProvider {
         } else {
             sql.SELECT("id");
         }
+        sql.SELECT("complex_id");
+        sql.SELECT("name");
+        sql.SELECT("address");
         sql.FROM("buildings");
         applyWhere(sql, example, false);
         
@@ -63,6 +78,18 @@ public class BuildingSqlProvider {
             sql.SET("id = #{record.id,jdbcType=INTEGER}");
         }
         
+        if (record.getComplexId() != null) {
+            sql.SET("complex_id = #{record.complexId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getName() != null) {
+            sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAddress() != null) {
+            sql.SET("address = #{record.address,jdbcType=VARCHAR}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -72,9 +99,33 @@ public class BuildingSqlProvider {
         sql.UPDATE("buildings");
         
         sql.SET("id = #{record.id,jdbcType=INTEGER}");
+        sql.SET("complex_id = #{record.complexId,jdbcType=INTEGER}");
+        sql.SET("name = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("address = #{record.address,jdbcType=VARCHAR}");
         
         BuildingExample example = (BuildingExample) parameter.get("example");
         applyWhere(sql, example, true);
+        return sql.toString();
+    }
+
+    public String updateByPrimaryKeySelective(Building record) {
+        SQL sql = new SQL();
+        sql.UPDATE("buildings");
+        
+        if (record.getComplexId() != null) {
+            sql.SET("complex_id = #{complexId,jdbcType=INTEGER}");
+        }
+        
+        if (record.getName() != null) {
+            sql.SET("name = #{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getAddress() != null) {
+            sql.SET("address = #{address,jdbcType=VARCHAR}");
+        }
+        
+        sql.WHERE("id = #{id,jdbcType=INTEGER}");
+        
         return sql.toString();
     }
 

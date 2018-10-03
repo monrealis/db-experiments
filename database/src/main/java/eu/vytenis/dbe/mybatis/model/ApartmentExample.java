@@ -163,6 +163,136 @@ public class ApartmentExample {
             addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
+
+        public Criteria andUnitNumberIsNull() {
+            addCriterion("unit_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberIsNotNull() {
+            addCriterion("unit_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberEqualTo(String value) {
+            addCriterion("unit_number =", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberNotEqualTo(String value) {
+            addCriterion("unit_number <>", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberGreaterThan(String value) {
+            addCriterion("unit_number >", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("unit_number >=", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberLessThan(String value) {
+            addCriterion("unit_number <", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberLessThanOrEqualTo(String value) {
+            addCriterion("unit_number <=", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberLike(String value) {
+            addCriterion("unit_number like", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberNotLike(String value) {
+            addCriterion("unit_number not like", value, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberIn(List<String> values) {
+            addCriterion("unit_number in", values, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberNotIn(List<String> values) {
+            addCriterion("unit_number not in", values, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberBetween(String value1, String value2) {
+            addCriterion("unit_number between", value1, value2, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitNumberNotBetween(String value1, String value2) {
+            addCriterion("unit_number not between", value1, value2, "unitNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdIsNull() {
+            addCriterion("building_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdIsNotNull() {
+            addCriterion("building_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdEqualTo(Integer value) {
+            addCriterion("building_id =", value, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdNotEqualTo(Integer value) {
+            addCriterion("building_id <>", value, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdGreaterThan(Integer value) {
+            addCriterion("building_id >", value, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("building_id >=", value, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdLessThan(Integer value) {
+            addCriterion("building_id <", value, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdLessThanOrEqualTo(Integer value) {
+            addCriterion("building_id <=", value, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdIn(List<Integer> values) {
+            addCriterion("building_id in", values, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdNotIn(List<Integer> values) {
+            addCriterion("building_id not in", values, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdBetween(Integer value1, Integer value2) {
+            addCriterion("building_id between", value1, value2, "buildingId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBuildingIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("building_id not between", value1, value2, "buildingId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
