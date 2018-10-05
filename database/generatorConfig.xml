@@ -14,7 +14,7 @@
         </table>
         <table tableName="buildings" domainObjectName="Building">
         </table>
-        <table tableName="reqhests" domainObjectName="Request">
+        <table tableName="requests" domainObjectName="Request">
         </table>
         <table tableName="complexes" domainObjectName="Complex">
         </table>
@@ -37,7 +37,7 @@
         </table>
         <table tableName="buildings" domainObjectName="Building">
         </table>
-        <table tableName="reqhests" domainObjectName="Request">
+        <table tableName="requests" domainObjectName="Request">
         </table>
         <table tableName="complexes" domainObjectName="Complex">
         </table>
