@@ -1,31 +1,61 @@
 package eu.vytenis.dbe.loader;
 
 import org.apache.ibatis.session.SqlSession;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import eu.vytenis.dbe.loader.Sessions;
 import eu.vytenis.dbe.mybatis.client.ApartmentMapper;
 import eu.vytenis.dbe.mybatis.client.ApartmentTenantMapper;
 import eu.vytenis.dbe.mybatis.client.BuildingMapper;
 import eu.vytenis.dbe.mybatis.client.ComplexMapper;
 import eu.vytenis.dbe.mybatis.client.RequestMapper;
 import eu.vytenis.dbe.mybatis.client.TenantMapper;
+import eu.vytenis.dbe.mybatis.model.Apartment;
 import eu.vytenis.dbe.mybatis.model.ApartmentExample;
 import eu.vytenis.dbe.mybatis.model.ApartmentTenantExample;
+import eu.vytenis.dbe.mybatis.model.Building;
 import eu.vytenis.dbe.mybatis.model.BuildingExample;
 import eu.vytenis.dbe.mybatis.model.ComplexExample;
 import eu.vytenis.dbe.mybatis.model.RequestExample;
 import eu.vytenis.dbe.mybatis.model.TenantExample;
 
 class LoaderIT {
+    private Session session = Session.vertica();
+
+    @AfterEach
+    public void after() {
+        session.rollback();
+    }
+
     @Test
     void deleteAll() {
-        Session session = Session.mysql();
-
         session.deleteAll();
     }
 
+    @Test
+    public void insert() {
+        deleteAll();
+        Building b = new Building();
+        for (int i = 0; i < 50; ++i) {
+            b.setId(i);
+            b.setComplexId(1);
+            b.setName("Name " + i);
+            b.setAddress("Address " + i);
+            session.buildings.insert(b);
+        }
+        Apartment a = new Apartment();
+        for (int i = 0; i < 100; ++i) {
+            a.setId(i);
+            a.setUnitNumber("UN" + i);
+            a.setBuildingId(i / 2);
+            session.apartments.insert(a);
+        }
+
+        session.commit();
+    }
+
     public static class Session {
+        private final SqlSession session;
         private final ApartmentMapper apartments;
         private final ApartmentTenantMapper apartmentTenants;
         private final TenantMapper tenants;
@@ -46,6 +76,7 @@ class LoaderIT {
         }
 
         public Session(SqlSession session) {
+            this.session = session;
             this.apartments = session.getMapper(ApartmentMapper.class);
             this.apartmentTenants = session.getMapper(ApartmentTenantMapper.class);
             this.tenants = session.getMapper(TenantMapper.class);
@@ -62,6 +93,14 @@ class LoaderIT {
             buildings.deleteByExample(new BuildingExample());
             complexes.deleteByExample(new ComplexExample());
             requests.deleteByExample(new RequestExample());
+        }
+
+        public void commit() {
+            session.commit();
+        }
+
+        public void rollback() {
+            session.rollback();
         }
     }
 }
