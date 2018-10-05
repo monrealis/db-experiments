@@ -1,4 +1,4 @@
-package loader;
+package eu.vytenis.dbe.loader;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
