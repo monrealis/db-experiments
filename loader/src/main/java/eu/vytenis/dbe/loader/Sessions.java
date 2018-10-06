@@ -55,6 +55,12 @@ public class Sessions {
         c.addMapper(BuildingMapper.class);
         c.addMapper(ComplexMapper.class);
         c.addMapper(RequestMapper.class);
+        c.addMapper(eu.vytenis.dbe.dsql.client.ApartmentMapper.class);
+        c.addMapper(eu.vytenis.dbe.dsql.client.ApartmentTenantMapper.class);
+        c.addMapper(eu.vytenis.dbe.dsql.client.TenantMapper.class);
+        c.addMapper(eu.vytenis.dbe.dsql.client.BuildingMapper.class);
+        c.addMapper(eu.vytenis.dbe.dsql.client.ComplexMapper.class);
+        c.addMapper(eu.vytenis.dbe.dsql.client.RequestMapper.class);
         return c;
     }
 
