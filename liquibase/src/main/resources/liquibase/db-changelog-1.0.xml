@@ -69,4 +69,19 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="2" author="monrealis">
+        <addForeignKeyConstraint constraintName="fk_apartments_building"
+            baseTableName="apartments" baseColumnNames="building_id" referencedTableName="buildings"
+            referencedColumnNames="id" />
+        <addForeignKeyConstraint constraintName="fk_buildings_complex" baseTableName="buildings"
+            baseColumnNames="complex_id" referencedTableName="complexes" referencedColumnNames="id" />
+        <addForeignKeyConstraint constraintName="fk_requests_apartment" baseTableName="requests"
+            baseColumnNames="apartment_id" referencedTableName="apartments" referencedColumnNames="id" />
+        <addForeignKeyConstraint constraintName="fk_apartment_tenants_tenant"
+            baseTableName="apartment_tenants" baseColumnNames="tenant_id" referencedTableName="tenants"
+            referencedColumnNames="id" />
+        <addForeignKeyConstraint constraintName="fk_apartment_tenants_apartment"
+            baseTableName="apartment_tenants" baseColumnNames="apartment_id" referencedTableName="apartments"
+            referencedColumnNames="id" />
+    </changeSet>
 </databaseChangeLog>
