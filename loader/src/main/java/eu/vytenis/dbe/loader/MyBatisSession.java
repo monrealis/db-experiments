@@ -48,11 +48,11 @@ public class MyBatisSession extends BaseSession {
 
     @Override
     public void deleteAll() {
-        apartments.deleteByExample(new ApartmentExample());
         apartmentTenants.deleteByExample(new ApartmentTenantExample());
+        requests.deleteByExample(new RequestExample());
+        apartments.deleteByExample(new ApartmentExample());
         tenants.deleteByExample(new TenantExample());
         buildings.deleteByExample(new BuildingExample());
         complexes.deleteByExample(new ComplexExample());
-        requests.deleteByExample(new RequestExample());
     }
 }
