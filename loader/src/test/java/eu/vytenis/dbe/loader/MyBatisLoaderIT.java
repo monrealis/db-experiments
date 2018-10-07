@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import eu.vytenis.dbe.mybatis.model.Apartment;
 import eu.vytenis.dbe.mybatis.model.Building;
+import eu.vytenis.dbe.mybatis.model.Complex;
 
 class MyBatisLoaderIT {
-    private MyBatisSession session = MyBatisSession.vertica();
+    private MyBatisSession session = MyBatisSession.postgres();
 
     @AfterEach
     public void after() {
@@ -22,22 +23,39 @@ class MyBatisLoaderIT {
     @Test
     public void insert() {
         deleteAll();
-        Building b = new Building();
-        for (int i = 0; i < 50; ++i) {
-            b.setId(i);
-            b.setComplexId(1);
-            b.setName("Name " + i);
-            b.setAddress("Address " + i);
-            session.buildings.insert(b);
-        }
-        Apartment a = new Apartment();
-        for (int i = 0; i < 100; ++i) {
-            a.setId(i);
-            a.setUnitNumber("UN" + i);
-            a.setBuildingId(i / 2);
-            session.apartments.insert(a);
-        }
-
+        int nComplexes = 100;
+        int nBuildings = 500;
+        int nApartments = 1000;
+        for (int i = 0; i < nComplexes; ++i)
+            session.complexes.insert(complex(i));
+        for (int i = 0; i < nBuildings; ++i)
+            session.buildings.insert(building(i, i % nComplexes));
+        for (int i = 0; i < nApartments; ++i)
+            session.apartments.insert(apartment(i, i % nBuildings));
         session.commit();
+    }
+
+    private Apartment apartment(int id, int buildingId) {
+        Apartment a = new Apartment();
+        a.setId(id);
+        a.setUnitNumber("UN" + id);
+        a.setBuildingId(buildingId);
+        return a;
+    }
+
+    private Building building(int id, int complexId) {
+        Building b = new Building();
+        b.setId(id);
+        b.setComplexId(complexId);
+        b.setName("Name " + id);
+        b.setAddress("Address " + id);
+        return b;
+    }
+
+    private Complex complex(int id) {
+        Complex c = new Complex();
+        c.setId(id);
+        c.setName("Complex" + id);
+        return c;
     }
 }
