@@ -85,19 +85,19 @@
             referencedColumnNames="id" />
     </changeSet>
     <changeSet id="3" author="monrealis" dbms="postgresql">
-        <createIndex tableName="apartments" indexName="fk_apartments_building">
+        <createIndex tableName="apartments" indexName="idx_apartments_building">
             <column name="building_id" />
         </createIndex>
-        <createIndex tableName="buildings" indexName="fk_buildings_complex">
+        <createIndex tableName="buildings" indexName="idx_buildings_complex">
             <column name="complex_id" />
         </createIndex>
-        <createIndex tableName="requests" indexName="fk_requests_apartment">
+        <createIndex tableName="requests" indexName="idx_requests_apartment">
             <column name="apartment_id" />
         </createIndex>
-        <createIndex tableName="apartment_tenants" indexName="fk_apartment_tenants_tenant">
+        <createIndex tableName="apartment_tenants" indexName="idx_apartment_tenants_tenant">
             <column name="tenant_id" />
         </createIndex>
-        <createIndex tableName="apartment_tenants" indexName="fk_apartment_tenants_apartment">
+        <createIndex tableName="apartment_tenants" indexName="idx_apartment_tenants_apartment">
             <column name="apartment_id" />
         </createIndex>
     </changeSet>
