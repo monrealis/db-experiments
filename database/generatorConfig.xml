@@ -7,8 +7,8 @@
         </commentGenerator>
         <jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/postgres"
             driverClass="org.postgresql.Driver" password="" userId="postgres" />
-        <javaModelGenerator targetPackage="eu.vytenis.dbe.mybatis.model" targetProject="database" />
-        <javaClientGenerator targetPackage="eu.vytenis.dbe.mybatis.client" targetProject="database"
+        <javaModelGenerator targetPackage="eu.vytenis.dbe.mybatis.model" targetProject="MAVEN" />
+        <javaClientGenerator targetPackage="eu.vytenis.dbe.mybatis.client" targetProject="MAVEN"
             type="ANNOTATEDMAPPER" />
         <table tableName="apartments" domainObjectName="Apartment">
         </table>
@@ -30,8 +30,8 @@
         </commentGenerator>
         <jdbcConnection connectionURL="jdbc:postgresql://localhost:5432/postgres"
             driverClass="org.postgresql.Driver" password="" userId="postgres" />
-        <javaModelGenerator targetPackage="eu.vytenis.dbe.dsql.model" targetProject="database" />
-        <javaClientGenerator targetPackage="eu.vytenis.dbe.dsql.client" targetProject="database"
+        <javaModelGenerator targetPackage="eu.vytenis.dbe.dsql.model" targetProject="MAVEN" />
+        <javaClientGenerator targetPackage="eu.vytenis.dbe.dsql.client" targetProject="MAVEN"
             type="ANNOTATEDMAPPER" />
         <table tableName="apartments" domainObjectName="Apartment">
         </table>
