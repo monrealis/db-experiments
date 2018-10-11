@@ -16,12 +16,12 @@ import eu.vytenis.dbe.mybatis.model.RequestExample;
 import eu.vytenis.dbe.mybatis.model.TenantExample;
 
 public class MyBatisSession extends BaseSession {
-    final ApartmentMapper apartments;
-    final ApartmentTenantMapper apartmentTenants;
-    final TenantMapper tenants;
-    final BuildingMapper buildings;
-    final ComplexMapper complexes;
-    final RequestMapper requests;
+    public final ApartmentMapper apartments;
+    public final ApartmentTenantMapper apartmentTenants;
+    public final TenantMapper tenants;
+    public final BuildingMapper buildings;
+    public final ComplexMapper complexes;
+    public final RequestMapper requests;
 
     public static MyBatisSession postgres() {
         return new MyBatisSession(new Sessions().postgres());
