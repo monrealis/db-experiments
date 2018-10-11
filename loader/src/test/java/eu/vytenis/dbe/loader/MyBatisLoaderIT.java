@@ -11,7 +11,7 @@ import eu.vytenis.dbe.mybatis.model.Request;
 import eu.vytenis.dbe.mybatis.model.Tenant;
 
 class MyBatisLoaderIT {
-    private MyBatisSession session = MyBatisSession.postgres();
+    private MyBatisSession session = MyBatisSession.vertica();
 
     @AfterEach
     public void after() {
@@ -26,12 +26,12 @@ class MyBatisLoaderIT {
     @Test
     public void insert() {
         deleteAll();
-        int nComplexes = 100;
-        int nBuildings = 500;
-        int nApartments = 1000;
-        int nRequests = 500;
-        int nTenants = 100;
-        int nApartmentTenants = 1000;
+        int nComplexes = 1000;
+        int nBuildings = 5000;
+        int nApartments = 10000;
+        int nRequests = 5000;
+        int nTenants = 10000;
+        int nApartmentTenants = 10000;
         for (int i = 0; i < nComplexes; ++i)
             session.complexes.insert(complex(i));
         for (int i = 0; i < nBuildings; ++i)
