@@ -32,10 +32,21 @@ class DsqlLoaderIT {
         updateOne();
     }
 
+    @Test
+    void delete() {
+        session.deleteAll();
+        session.complexes.insert(complex(1));
+        deleteOne();
+    }
+
     private void updateOne() {
         Complex c = new Complex();
         c.setId(1);
         session.complexes.updateByExampleSelective(c).where(id, isEqualTo(1)).build().execute();
+    }
+
+    private void deleteOne() {
+        session.complexes.deleteByExample().where(id, isEqualTo(1)).build().execute();
     }
 
     private Complex complex(int id) {
