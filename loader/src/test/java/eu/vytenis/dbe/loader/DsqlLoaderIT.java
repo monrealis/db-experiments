@@ -29,24 +29,24 @@ class DsqlLoaderIT {
     void update() {
         session.deleteAll();
         session.complexes.insert(complex(1));
-        updateOne();
+        updateOne(1);
     }
 
     @Test
     void delete() {
         session.deleteAll();
         session.complexes.insert(complex(1));
-        deleteOne();
+        deleteOne(1);
     }
 
-    private void updateOne() {
+    private void updateOne(int complexId) {
         Complex c = new Complex();
         c.setId(1);
-        session.complexes.updateByExampleSelective(c).where(id, isEqualTo(1)).build().execute();
+        session.complexes.updateByExampleSelective(c).where(id, isEqualTo(complexId)).build().execute();
     }
 
-    private void deleteOne() {
-        session.complexes.deleteByExample().where(id, isEqualTo(1)).build().execute();
+    private void deleteOne(int complexId) {
+        session.complexes.deleteByExample().where(id, isEqualTo(complexId)).build().execute();
     }
 
     private Complex complex(int id) {
