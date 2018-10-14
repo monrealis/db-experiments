@@ -82,7 +82,8 @@ class MyBatisLoaderIT {
         Request r = new Request();
         r.setId(id);
         r.setApartmentId(apartmentId);
-        r.setStatus("NONE");
+        int statusIndex = id % Status.values().length;
+        r.setStatus(Status.values()[statusIndex].code());
         return r;
     }
 
@@ -91,6 +92,19 @@ class MyBatisLoaderIT {
         at.setApartmentId(apartmentId);
         at.setTenantId(tenantId);
         return at;
+    }
+
+    public static enum Status {
+        Created("C"), InProgress("IP"), Finished("F");
+        private final String code;
+
+        Status(String code) {
+            this.code = code;
+        }
+
+        public String code() {
+            return code;
+        }
     }
 
 }
