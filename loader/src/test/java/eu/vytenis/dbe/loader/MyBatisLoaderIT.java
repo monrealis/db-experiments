@@ -26,12 +26,13 @@ class MyBatisLoaderIT {
     @Test
     public void insert() {
         deleteAll();
-        int nComplexes = 1000;
-        int nBuildings = 5000;
-        int nApartments = 10000;
-        int nRequests = 5000;
-        int nTenants = 10000;
-        int nApartmentTenants = 10000;
+        int factor = 1000;
+        int nComplexes = 1 * factor;
+        int nBuildings = 5 * factor;
+        int nApartments = 10 * factor;
+        int nRequests = 5 * factor;
+        int nTenants = 10 * factor;
+        int nApartmentTenants = 10 * factor;
         for (int i = 0; i < nComplexes; ++i)
             session.complexes.insert(complex(i));
         for (int i = 0; i < nBuildings; ++i)
