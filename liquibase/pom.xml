@@ -4,7 +4,6 @@
     <groupId>eu.vytenis.dbe</groupId>
     <artifactId>liquibase</artifactId>
     <version>0.1-SNAPSHOT</version>
-
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
@@ -34,7 +33,6 @@
                     <version>3.6.2</version>
                 </plugin>
             </plugins>
-
         </pluginManagement>
         <plugins>
             <plugin>
