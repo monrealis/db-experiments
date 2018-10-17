@@ -112,4 +112,12 @@
             <replace replace="(address" with="(address desc" />
         </modifySql>
     </changeSet>
+    <changeSet id="5" author="monrealis" dbms="postgresql">
+        <createIndex tableName="requests" indexName="idx_requests_description">
+            <column name="description" />
+        </createIndex>
+        <modifySql>
+            <replace replace="(description" with=" using hash (description" />
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>
