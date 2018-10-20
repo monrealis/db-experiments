@@ -10,12 +10,12 @@ import eu.vytenis.dbe.dsql.client.RequestMapper;
 import eu.vytenis.dbe.dsql.client.TenantMapper;
 
 public class DsqlSession extends BaseSession {
-    public final ApartmentMapper apartments;
-    public final ApartmentTenantMapper apartmentTenants;
-    public final TenantMapper tenants;
-    public final BuildingMapper buildings;
-    public final ComplexMapper complexes;
-    public final RequestMapper requests;
+    private final ApartmentMapper apartments;
+    private final ApartmentTenantMapper apartmentTenants;
+    private final TenantMapper tenants;
+    private final BuildingMapper buildings;
+    private final ComplexMapper complexes;
+    private final RequestMapper requests;
 
     public static DsqlSession postgres() {
         return new DsqlSession(new Sessions().postgres());
@@ -48,5 +48,29 @@ public class DsqlSession extends BaseSession {
         buildings.deleteByExample().build().execute();
         complexes.deleteByExample().build().execute();
         requests.deleteByExample().build().execute();
+    }
+
+    public ApartmentMapper apartments() {
+        return apartments;
+    }
+
+    public ApartmentTenantMapper apartmentTenants() {
+        return apartmentTenants;
+    }
+
+    public TenantMapper tenants() {
+        return tenants;
+    }
+
+    public BuildingMapper buildings() {
+        return buildings;
+    }
+
+    public ComplexMapper complexes() {
+        return complexes;
+    }
+
+    public RequestMapper requests() {
+        return requests;
     }
 }

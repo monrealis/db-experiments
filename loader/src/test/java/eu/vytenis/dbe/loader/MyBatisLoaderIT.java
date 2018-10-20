@@ -34,17 +34,17 @@ class MyBatisLoaderIT {
         int nTenants = 10 * factor;
         int nApartmentTenants = 10 * factor;
         for (int i = 0; i < nComplexes; ++i)
-            session.complexes.insert(complex(i));
+            session.complexes().insert(complex(i));
         for (int i = 0; i < nBuildings; ++i)
-            session.buildings.insert(building(i, i % nComplexes));
+            session.buildings().insert(building(i, i % nComplexes));
         for (int i = 0; i < nApartments; ++i)
-            session.apartments.insert(apartment(i, i % nBuildings));
+            session.apartments().insert(apartment(i, i % nBuildings));
         for (int i = 0; i < nRequests; ++i)
-            session.requests.insert(request(i, i % nApartments));
+            session.requests().insert(request(i, i % nApartments));
         for (int i = 0; i < nTenants; ++i)
-            session.tenants.insert(tenant(i));
+            session.tenants().insert(tenant(i));
         for (int i = 0; i < nApartmentTenants; ++i)
-            session.apartmentTenants.insert(apartmentTenant(i % nApartments, i % nTenants));
+            session.apartmentTenants().insert(apartmentTenant(i % nApartments, i % nTenants));
         session.commit();
     }
 
