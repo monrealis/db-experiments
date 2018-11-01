@@ -1,12 +1,21 @@
 package eu.vytenis.dbe.loader;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import static java.util.function.Function.identity;
 
 import org.dataloader.BatchLoader;
 import org.dataloader.DataLoader;
+import org.dataloader.MappedBatchLoader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +37,22 @@ public class DataLoaderIT {
         load(dataLoader);
     }
 
+    @Test
+    void mappedBatchLoader() {
+        prepare();
+        DataLoader<Integer, Complex> dataLoader = createMappedDataLoader();
+        load(dataLoader);
+    }
+
     private DataLoader<Integer, Complex> createDataLoader() {
         BatchLoader<Integer, Complex> batchLoader = ids -> supplyAsync(() -> selectByIds(ids));
         DataLoader<Integer, Complex> dataLoader = DataLoader.newDataLoader(batchLoader);
+        return dataLoader;
+    }
+
+    private DataLoader<Integer, Complex> createMappedDataLoader() {
+        MappedBatchLoader<Integer, Complex> batchLoader = ids -> supplyAsync(() -> selectComplexesByIds(ids));
+        DataLoader<Integer, Complex> dataLoader = DataLoader.newMappedDataLoader(batchLoader);
         return dataLoader;
     }
 
@@ -52,14 +74,20 @@ public class DataLoaderIT {
     }
 
     private List<Complex> selectByIds(List<Integer> ids) {
-        ComplexExample e = exampleByIds(ids);
-        List<Complex> c = session.complexes().selectByExample(e);
-        return c;
+        Map<Integer, Complex> byId = selectComplexesByIds(new HashSet<>(ids));
+        return ids.stream().map(byId::get).collect(toList());
     }
 
-    private ComplexExample exampleByIds(List<Integer> ids) {
+    private Map<Integer, Complex> selectComplexesByIds(Set<Integer> ids) {
+        ComplexExample example = exampleByIds(ids);
+        List<Complex> complexes = session.complexes().selectByExample(example);
+        Map<Integer, Complex> byId = complexes.stream().collect(toMap(Complex::getId, identity()));
+        return byId;
+    }
+
+    private ComplexExample exampleByIds(Collection<Integer> ids) {
         ComplexExample e = new ComplexExample();
-        e.createCriteria().andIdIn(ids);
+        e.createCriteria().andIdIn(new ArrayList<>(ids));
         return e;
     }
 
