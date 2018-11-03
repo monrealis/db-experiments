@@ -70,7 +70,8 @@ public class DataLoaderIT {
     }
 
     private CompletableFuture<Void> load(DataLoader<Integer, Complex> dataLoader, int id) {
-        return dataLoader.load(id).thenAccept(c -> System.out.println(id + ":" + c.getName()));
+        return dataLoader.load(id).thenAccept(c -> System.out.println(id + ":" + c.getName()))
+                .thenAccept(c -> dataLoader.load(id + 100));
     }
 
     private List<Complex> selectByIds(List<Integer> ids) {
